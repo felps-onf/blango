@@ -58,11 +58,24 @@ class Dev(Configuration):
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
+        "django.contrib.sites",
         "blog",
         "crispy_forms",
         "crispy_bootstrap5",
-        "debug_toolbar"
+        "debug_toolbar",
+        "allauth",
+        "allauth.account",
+        "allauth.socialaccount",
+        "allauth.socialaccount.providers.google"
     ]
+
+    SITE_ID = 1
+    ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+    ACCOUNT_EMAIL_REQUIRED = True
+    ACCOUNT_USERNAME_REQUIRED = False
+    ACCOUNT_AUTHENTICATION_METHOD = "email"
+
+    
 
 
     PASSWORD_HASHERS = [
@@ -71,6 +84,17 @@ class Dev(Configuration):
       'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
       'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
     ]
+
+
+    SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {
+            "client_id": "1029073031432-qbs11c9d41nhneoihprkc222mhbash9f.apps.googleusercontent.com",
+            "secret": "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",
+            "key": ""
+        }
+    }
+}
 
 
     LOGGING = {
