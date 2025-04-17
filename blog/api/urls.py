@@ -8,11 +8,10 @@ from rest_framework.routers import DefaultRouter
 import os
 
 
-
+# Instantiate Router for ViewSets
 router = DefaultRouter()
 router.register("tags", TagViewSet)
 router.register("posts", PostViewSet)
-
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -24,24 +23,21 @@ schema_view = get_schema_view(
     public=True,
 )
 
-
 urlpatterns = [
     path("users/<str:email>", UserDetail.as_view(), name="api_user_detail"),
+    # Remove specific postlist / postdetail views and replace with router.urls
+]
+
+
+urlpatterns = format_suffix_patterns(urlpatterns)
+
+urlpatterns += [
     path("auth/", include("rest_framework.urls")),
-    path("", include(router.urls)),
     path("token-auth/", views.obtain_auth_token),
-    re_path(
-        r"^swagger\.(json|yaml)$",  # Removed the duplicate format group and fixed the pattern
-        schema_view.without_ui(cache_timeout=0),
-        name="schema-json",
-    ),
     path(
         "swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
-   
-
-]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
+    path("", include(router.urls)),
+   ]
