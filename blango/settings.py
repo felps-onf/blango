@@ -68,7 +68,8 @@ class Dev(Configuration):
         "allauth.socialaccount",
         "allauth.socialaccount.providers.google",
         "rest_framework",
-        "rest_framework.authtoken"
+        "rest_framework.authtoken",
+        "django_filters"
     ]
 
 
@@ -164,6 +165,15 @@ class Dev(Configuration):
     ], "DEFAULT_PERMISSION_CLASSES": [
       "rest_framework.permissions.IsAuthenticatedOrReadOnly"
     ],
+
+      "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+      "PAGE_SIZE" : 100,
+
+
+      "DEFAULT_FILTER_BACKENDS": [
+            "django_filters.rest_framework.DjangoFilterBackend",
+            "rest_framework.filters.OrderingFilter"
+        ],
 
     "DEFAULT_THROTTLE_CLASSES": [
             "blog.api.throttling.AnonSustainedThrottle",
