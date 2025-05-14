@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 import os
 from configurations import Configuration, values
 import dj_database_url
@@ -49,6 +50,14 @@ class Dev(Configuration):
     AUTH_USER_MODEL = "blango_auth.User"
 
     # Application definition
+
+
+
+    SIMPLE_JWT = {
+        "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+        "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    }
+
 
     INSTALLED_APPS = [
         "blango_auth",
@@ -161,6 +170,7 @@ class Dev(Configuration):
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication"
         
     ], "DEFAULT_PERMISSION_CLASSES": [
       "rest_framework.permissions.IsAuthenticatedOrReadOnly"
