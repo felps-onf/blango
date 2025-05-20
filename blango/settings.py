@@ -78,12 +78,14 @@ class Dev(Configuration):
         "allauth.socialaccount.providers.google",
         "rest_framework",
         "rest_framework.authtoken",
-        "django_filters"
+        "django_filters",
+        "versatileimagefield"
     ]
 
 
 
-    
+    MEDIA_ROOT = BASE_DIR / "media"
+    MEDIA_URL = "/media/"
 
     SITE_ID = 1
     ACCOUNT_USER_MODEL_USERNAME_FIELD = None
